@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<hr>
+	<h2 class="page-header">{{event.name}}</h2>
+	<ul class="list-group">
+		<li class="list-group-item"><img src="{{event.image}}"></li>
+		<li class="list-group-item">Date:
+			<strong>
+				{{event.eventDate|date('F j, Y, g:i a')}}
+			</strong>
+		</li>
+		<li class="list-group-item">Description:
+			{{event.description}}</li>
+		<li class="list-group-item">Capacity:
+			{{event.capacity}}</li>
+		<li class="list-group-item">E-Mail:
+			{{event.email}}</li>
+		<li class="list-group-item">Phone:
+			{{event.phone}}</li>
+		<li class="list-group-item">Address:
+			{{event.address}}</li>
+		<li class="list-group-item">URL:
+			<a href="{{event.webAddress}}" target="_blank">{{event.webAddress}}</li>		
+	</ul>
+
+	<br>
+	<a class="btn btn-warning" href="/">Back to overview</a>
+{% endblock %}
