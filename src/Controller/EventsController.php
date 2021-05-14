@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType; //For number fields
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType; //I did not implement this yet
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,15 +18,19 @@ use App\Entity\Events;
 
 class EventsController extends AbstractController
 {
+    // This leads to the index page where all events are printed
+    
     #[Route('/', name: 'events')]
     public function index(): Response
     {
         $events = $this->getDoctrine()->getRepository('App:Events')->findAll();
-        // dd($events);
+        // dd($events); // for testing purposes
 
         return $this->render('events/index.html.twig', array('events' => $events));
     }
 
+    // Creating events form
+    
     #[Route('/create', name: 'events_create')]
     public function create(Request $request): Response
     {
@@ -91,6 +95,8 @@ class EventsController extends AbstractController
         return $this->render('events/create.html.twig', array('form' => $form->createView()));
     }
 
+    // Edit events form
+    
     #[Route('/edit/{id}', name: 'events_edit')]
     public function edit(Request $request, $id): Response
     {
@@ -154,6 +160,8 @@ class EventsController extends AbstractController
         return $this->render('events/edit.html.twig', array('event' => $event, 'form' => $form->createView()));
     }
 
+    // Leads to the details page of the certain event
+
     #[Route('/details/{id}', name: 'events_details')]
     public function details($id): Response
     {
@@ -161,6 +169,8 @@ class EventsController extends AbstractController
         return $this->render('events/details.html.twig', array('event' => $event));
     }
 
+    // Delete certain event
+    
     #[Route('/delete/{id}', name: 'events_delete')]
     public function delete($id){
         $em = $this->getDoctrine()->getManager();
